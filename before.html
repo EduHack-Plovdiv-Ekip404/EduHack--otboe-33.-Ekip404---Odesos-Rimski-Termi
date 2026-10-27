@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Одесос | Римските терми - Преди (Възстановка)</title>
+    <meta name="description" content="Интерактивна 3D архитектурна възстановка на Римските терми в Одесос (II-III в.)." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav aria-label="Главна навигация">
+      <a href="index.html" class="brand">ОДЕСОС<small>АРХИТЕКТУРА НА АНТИЧНОСТТА</small></a>
+      <a href="index.html" class="nav-btn">Начало</a>
+      <a href="before.html" class="nav-btn active" aria-current="page">Преди</a>
+      <a href="now.html" class="nav-btn">Сега</a>
+    </nav>
+
+    <section id="before" class="view" aria-label="Възстановка"></section>
+    <div id="error" class="error" role="alert" hidden></div>
+
+    <script src="thermae.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        window.startThermaeScene('before', false);
+      });
+    </script>
+  </body>
+</html>

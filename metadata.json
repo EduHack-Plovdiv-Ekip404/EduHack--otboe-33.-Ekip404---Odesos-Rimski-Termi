@@ -1,0 +1,6 @@
+{
+  "name": "Римските терми на Одесос (Варна)",
+  "description": "Интерактивна виртуална 3D разходка, история, архитектура и образователен гид за Големите римски терми в Одесос (Варна).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
