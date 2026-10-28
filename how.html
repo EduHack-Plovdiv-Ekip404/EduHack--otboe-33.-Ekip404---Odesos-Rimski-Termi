@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Одесос | Как - Скица на термите и инженерно строителство</title>
+    <meta name="description" content="Как са построени Римските терми в Одесос: архитектурна скица, хипокауст, смесена зидария и акведукт." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Хедър и Меню -->
+    <nav aria-label="Главна навигация">
+      <a href="index.html" class="brand">
+        ОДЕСОС
+        <small>АРХИТЕКТУРА НА АНТИЧНОСТТА</small>
+      </a>
+      <button class="nav-toggle" aria-label="Отвори менюто" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">Начало</a>
+        <a href="history.html" class="nav-btn active" aria-current="page">История</a>
+        <div class="nav-dropdown">
+          <a href="before.html" class="nav-btn">Визуализация ▾</a>
+          <div class="dropdown-menu">
+            <a href="before.html">3D Преди (Възстановка)</a>
+            <a href="now.html">3D Сега (Руини)</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-btn">Галерия</a>
+      </div>
+    </nav>
+    <script src="nav.js"></script>
+
+    <div class="page-container">
+      <header class="page-header">
+        <span class="eyebrow">История · Таб 4</span>
+        <h1>КАК · СКИЦА НА ТЕРМИТЕ И ГРАДЕЖ</h1>
+        <p class="page-intro">
+          Инженерният гений на древен Рим: сводове с височина 22 метра от античен бетон, устойчива на земетресения смесена зидария и гениалното подово отопление.
+        </p>
+      </header>
+
+      <!-- Навигационни табове към 4-те отделни страници -->
+      <div class="blocks-nav">
+        <a href="where.html" class="nav-btn">📍 Къде (Одесос)</a>
+        <a href="when.html" class="nav-btn">⏳ Кога (Хронология)</a>
+        <a href="why.html" class="nav-btn">🏛️ Защо (Живот и ритуал)</a>
+        <a href="how.html" class="nav-btn active" style="border-color: var(--gold); background: #d5b57922;">📐 Как (Скица и градеж)</a>
+        <a href="history.html" class="nav-btn" style="border-color: var(--line);">« Всички 4 блока</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+        <!-- Архитектурен план и скица -->
+        <div class="block-card">
+          <span class="block-badge">Архитектурна скица на комплекса</span>
+          <h2>Скица и разпределение</h2>
+          <div class="block-visual" style="border: 1px solid var(--gold);">
+            <svg viewBox="0 0 320 200" style="background:#0b1512; width:100%; height:auto;">
+              <!-- Контур на сградата -->
+              <rect x="20" y="25" width="280" height="150" fill="none" stroke="#d5b579" stroke-width="1.8" rx="2" />
+              <!-- Палестра (открит двор) -->
+              <rect x="35" y="40" width="70" height="120" fill="#24382e" stroke="#486857" stroke-width="1" />
+              <text x="70" y="95" fill="#d5b579" font-size="9" font-weight="bold" text-anchor="middle">ПАЛЕСТРА</text>
+              <text x="70" y="110" fill="#a8b3aa" font-size="7" text-anchor="middle">Открит двор</text>
+              <!-- Фригидариум -->
+              <rect x="115" y="40" width="55" height="120" fill="#1b323e" stroke="#325b71" stroke-width="1" />
+              <rect x="125" y="65" width="35" height="70" fill="#0284c7" opacity="0.3" />
+              <text x="142" y="95" fill="#38bdf8" font-size="8.5" font-weight="bold" text-anchor="middle">ФРИГИДАРИУМ</text>
+              <text x="142" y="110" fill="#a8b3aa" font-size="7" text-anchor="middle">Студен басейн</text>
+              <!-- Тепидариум -->
+              <rect x="180" y="40" width="45" height="120" fill="#382918" stroke="#684a29" stroke-width="1" />
+              <text x="202" y="95" fill="#f59e0b" font-size="8" font-weight="bold" text-anchor="middle">ТЕПИДАРИУМ</text>
+              <text x="202" y="110" fill="#a8b3aa" font-size="7" text-anchor="middle">Топла зала</text>
+              <!-- Калдариум -->
+              <rect x="235" y="30" width="55" height="140" fill="#421a14" stroke="#872e21" stroke-width="1" />
+              <text x="262" y="95" fill="#f87171" font-size="8.5" font-weight="bold" text-anchor="middle">КАЛДАРИУМ</text>
+              <text x="262" y="110" fill="#fca5a5" font-size="7" text-anchor="middle">Хипокауст ~45°C</text>
+              <!-- Пещи Praefurnia -->
+              <rect x="240" y="175" width="45" height="12" fill="#e76f51" rx="1" />
+              <text x="262" y="184" fill="#fff" font-size="6.5" font-weight="bold" text-anchor="middle">ПЕЩИ (Praefurnia)</text>
+              <!-- Посока Юг -->
+              <text x="262" y="20" fill="#ffd166" font-size="7.5" text-anchor="middle">▲ ЮГ (Слънчево греене)</text>
+            </svg>
+          </div>
+          <p class="block-body" style="font-size: 13.5px; line-height: 1.7; margin-top: 10px;">
+            <strong>Южна експозиция:</strong> Горещите зали (Калдариум и Тепидариум) са разположени от юг, за да улавят следобедните слънчеви лъчи през високи сводести прозорци съгласно предписанията на римския архитект Витрувий.
+          </p>
+        </div>
+
+        <!-- Хипокауст и Зидария -->
+        <div class="block-card">
+          <span class="block-badge">Строителна технология</span>
+          <h2>Хипокауст & Opus Mixtum</h2>
+          <div class="block-body" style="font-size: 13.5px; line-height: 1.8;">
+            <p>
+              <strong>Смесена зидария (Opus Mixtum):</strong><br />
+              Стените са изградени от редуващи се редове от бял дялан варовик и пояси от 4-5 реда плоски червени печени тухли, споени с хидравличен хоросан. Тази структура придава еластичност на сградата при черноморски трусове.
+            </p>
+            <div style="background: #101c18; border: 1px solid var(--line); border-radius: 4px; padding: 14px; margin: 14px 0;">
+              <h3 style="font-size: 15px; color: var(--gold); margin: 0 0 6px;">Елементи на хипокауста:</h3>
+              <ul style="padding-left: 18px; margin: 0; font-size: 13px; color: #c4cbc0;">
+                <li><strong>Праефурниум:</strong> Подземни пещи, захранвани денонощно с дърва.</li>
+                <li><strong>Пиле (Pilae):</strong> Десетки тухлени стълбчета с височина 1.20 м, поддържащи пода.</li>
+                <li><strong>Суспензура:</strong> Масивен под от керамика и хоросан, излъчващ лъчиста топлина.</li>
+                <li><strong>Тубули:</strong> Кухи глинени тръби в стените, действащи като комини.</li>
+              </ul>
+            </div>
+            <p>
+              <strong>Водопровод (Акведукт):</strong><br />
+              Захранването с вода е осигурено от 15-километров гравитационен водопровод, носещ чиста вода от извори край Франганското плато.
+            </p>
+          </div>
+          <div style="margin-top: 15px; display: flex; gap: 10px;">
+            <a href="before.html" class="primary" style="font-size: 12px; padding: 8px 14px;">
+              Виж в 3D (Възстановка) ↗
+            </a>
+            <a href="gallery.html" class="nav-btn" style="font-size: 12px; padding: 8px 14px;">
+              Към Галерията →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Футър -->
+    <footer class="site-footer">
+      <div class="footer-team">
+        Отбор „Одесос“
+        <span>Ученически проект · Римските терми във Варна</span>
+      </div>
+      <div class="footer-contacts">
+        <strong>Контакти:</strong> гр. Варна, ул. „Сан Стефано“ / ул. „Хан Крум“ ·
+        <a href="https://maps.google.com/?q=Roman+Thermae+Varna" target="_blank" rel="noopener">Google Maps</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -10,10 +10,21 @@
   <body>
     <nav aria-label="Главна навигация">
       <a href="index.html" class="brand">ОДЕСОС<small>АРХИТЕКТУРА НА АНТИЧНОСТТА</small></a>
-      <a href="index.html" class="nav-btn">Начало</a>
-      <a href="before.html" class="nav-btn">Преди</a>
-      <a href="now.html" class="nav-btn active" aria-current="page">Сега</a>
+      <button class="nav-toggle" aria-label="Отвори менюто" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">Начало</a>
+        <a href="history.html" class="nav-btn">История</a>
+        <div class="nav-dropdown">
+          <a href="now.html" class="nav-btn active" aria-current="page">Визуализация ▾</a>
+          <div class="dropdown-menu">
+            <a href="before.html">3D Преди (Възстановка)</a>
+            <a href="now.html" class="active">3D Сега (Руини)</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-btn">Галерия</a>
+      </div>
     </nav>
+    <script src="nav.js"></script>
 
     <section id="now" class="view" aria-label="Илюстративни руини"></section>
     <div id="error" class="error" role="alert" hidden></div>

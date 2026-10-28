@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Одесос | Галерия, препратки и линкове</title>
+    <meta name="description" content="Галерия на Римските терми в Одесос: фотоархив, артефакти от музея във Варна, чертежи и научни препратки." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Хедър и Меню -->
+    <nav aria-label="Главна навигация">
+      <a href="index.html" class="brand">
+        ОДЕСОС
+        <small>АРХИТЕКТУРА НА АНТИЧНОСТТА</small>
+      </a>
+      <button class="nav-toggle" aria-label="Отвори менюто" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">Начало</a>
+        <a href="history.html" class="nav-btn">История</a>
+        <div class="nav-dropdown">
+          <a href="before.html" class="nav-btn">Визуализация ▾</a>
+          <div class="dropdown-menu">
+            <a href="before.html">3D Преди (Възстановка)</a>
+            <a href="now.html">3D Сега (Руини)</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-btn active" aria-current="page">Галерия</a>
+      </div>
+    </nav>
+    <script src="nav.js"></script>
+
+    <div class="page-container">
+      <header class="page-header">
+        <span class="eyebrow">Архив · Артефакти · Източници</span>
+        <h1>ГАЛЕРИЯ, ПРЕПРАТКИ И ЛИНКОВЕ</h1>
+        <p class="page-intro">
+          Разгледайте визуалните материали от археологическите проучвания, редките артефакти, съхранявани в Историческия музей във Варна, и надеждните източници за античния Одесос.
+        </p>
+      </header>
+
+      <!-- Галерия карти -->
+      <div class="gallery-grid">
+        <!-- Карта 1: Руините днес -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
+              <rect width="300" height="180" fill="#142621" />
+              <!-- Зидове -->
+              <rect x="30" y="50" width="45" height="100" fill="#a76140" stroke="#d5b579" stroke-width="1" />
+              <rect x="75" y="80" width="60" height="70" fill="#8c5035" />
+              <rect x="160" y="60" width="50" height="90" fill="#a76140" stroke="#d5b579" stroke-width="1" />
+              <rect x="230" y="70" width="40" height="80" fill="#8c5035" />
+              <!-- Сводеста арка -->
+              <path d="M 95 80 A 20 20 0 0 1 135 80 L 135 150 L 95 150 Z" fill="#0e1b17" stroke="#d5b579" stroke-width="1" />
+              <!-- Небе и слънце -->
+              <circle cx="250" cy="40" r="14" fill="#ffd166" opacity="0.6" />
+              <text x="150" y="170" fill="#d5b579" font-size="9" text-anchor="middle">Зидове на Големите терми · Варна</text>
+            </svg>
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Археологически обект</span>
+            <h3>Монументалните руини</h3>
+            <p>Запазени фасадни зидове с височина до 18-20 метра в Гръцката махала на Варна, показващи смесената римска зидария opus mixtum.</p>
+          </div>
+        </div>
+
+        <!-- Карта 2: Хипокаустни колонки -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
+              <rect width="300" height="180" fill="#0f1a17" />
+              <!-- Колонки на редове -->
+              <g fill="#c97a56" stroke="#874326" stroke-width="0.8">
+                <rect x="40" y="90" width="22" height="60" />
+                <rect x="85" y="90" width="22" height="60" />
+                <rect x="130" y="90" width="22" height="60" />
+                <rect x="175" y="90" width="22" height="60" />
+                <rect x="220" y="90" width="22" height="60" />
+              </g>
+              <!-- Дим и топлина -->
+              <path d="M 50 85 Q 130 65 240 70" stroke="#f4a261" stroke-width="2" stroke-dasharray="3,3" fill="none" opacity="0.7" />
+              <text x="150" y="45" fill="#f4a261" font-size="10" font-weight="bold" text-anchor="middle">Тухлени стълбчета (Pilae)</text>
+              <text x="150" y="170" fill="#a8b3aa" font-size="8.5" text-anchor="middle">Останки от подовото отопление в Калдариума</text>
+            </svg>
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Инженерна система</span>
+            <h3>Хипокауст (Pilae)</h3>
+            <p>Десетки запазени колонки от печени квадратни тухли, през които е циркулирал горещ дим от пещите за нагряване на мраморния под.</p>
+          </div>
+        </div>
+
+        <!-- Карта 3: Скулптура на Асклепий и Хигия -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
+              <rect width="300" height="180" fill="#15211d" />
+              <!-- Постамент -->
+              <rect x="100" y="130" width="100" height="30" fill="#31423a" stroke="#d5b579" stroke-width="1" />
+              <!-- Статуя силует -->
+              <path d="M 130 130 L 135 65 Q 150 50 165 65 L 170 130 Z" fill="#eee8da" opacity="0.85" />
+              <circle cx="150" cy="45" r="11" fill="#eee8da" />
+              <!-- Змия на Асклепий -->
+              <path d="M 162 130 Q 170 95 160 80 T 165 60" stroke="#d5b579" stroke-width="2.5" fill="none" />
+              <text x="150" y="150" fill="#d5b579" font-size="8.5" font-weight="bold" text-anchor="middle">АСКЛЕПИЙ & ХИГИЯ</text>
+            </svg>
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Артефакти</span>
+            <h3>Мраморни статуи на лечители</h3>
+            <p>Мраморни пластики на Асклепий, богинята на чистотата Хигия и Аполон, открити при разкопките на термите, съхранявани в РИМ-Варна.</p>
+          </div>
+        </div>
+
+        <!-- Карта 4: Стригил и балсамарии -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
+              <rect width="300" height="180" fill="#111c19" />
+              <!-- Стригил (извито бронзово острие) -->
+              <path d="M 60 140 Q 90 135 120 100 Q 150 60 210 50" stroke="#d5b579" stroke-width="5" stroke-linecap="round" fill="none" />
+              <circle cx="58" cy="140" r="5" fill="#d5b579" />
+              <!-- Стъклен съд балсамарий -->
+              <path d="M 230 135 L 245 135 L 240 85 L 235 85 Z" fill="#58a59b" opacity="0.75" stroke="#fff" stroke-width="0.7" />
+              <circle cx="237.5" cy="80" r="3" fill="#58a59b" />
+              <text x="150" y="165" fill="#d5b579" font-size="9" text-anchor="middle">Бронзов стригил & стъклен балсамарий</text>
+            </svg>
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Бит & Хигиена</span>
+            <h3>Принадлежности за баня</h3>
+            <p>Извитият бронзов уред стригил за механично обиране на зехтина и потта от кожата, както и стъклени шишенца за благоуханни масла.</p>
+          </div>
+        </div>
+
+        <!-- Карта 5: Чертежът на братя Шкорпил -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
+              <rect width="300" height="180" fill="#202c27" />
+              <!-- Архитектурен чертеж мрежа -->
+              <line x1="30" y1="40" x2="270" y2="40" stroke="#d5b579" stroke-width="0.5" stroke-dasharray="2,2" />
+              <line x1="30" y1="140" x2="270" y2="140" stroke="#d5b579" stroke-width="0.5" stroke-dasharray="2,2" />
+              <rect x="50" y="55" width="200" height="70" fill="none" stroke="#eee8da" stroke-width="1.2" />
+              <line x1="110" y1="55" x2="110" y2="125" stroke="#eee8da" stroke-width="1" />
+              <line x1="170" y1="55" x2="170" y2="125" stroke="#eee8da" stroke-width="1" />
+              <text x="150" y="30" fill="#d5b579" font-size="8" text-anchor="middle">ПЛАН НА ТЕРМИТЕ · КАItem РЕЛ ШКОРПИЛ (1906)</text>
+              <text x="150" y="165" fill="#a8b3aa" font-size="8" text-anchor="middle">Първи научен план на римския паметник</text>
+            </svg>
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Архив & Проучване</span>
+            <h3>Планът на Шкорпил</h3>
+            <p>Пионерските топографски измервания на чешко-българските археолози Карел и Хермин Шкорпил от началото на XX век, доказали римския произход.</p>
+          </div>
+        </div>
+
+        <!-- Карта 6: 3D Възстановка -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
+              <rect width="300" height="180" fill="#1b2a26" />
+              <!-- Триъгълен фронтон и колонада -->
+              <polygon points="150,30 50,70 250,70" fill="#ded0ad" stroke="#d5b579" stroke-width="1.2" />
+              <rect x="70" y="70" width="12" height="75" fill="#ddd9c8" />
+              <rect x="110" y="70" width="12" height="75" fill="#ddd9c8" />
+              <rect x="150" y="70" width="12" height="75" fill="#ddd9c8" />
+              <rect x="190" y="70" width="12" height="75" fill="#ddd9c8" />
+              <rect x="230" y="70" width="12" height="75" fill="#ddd9c8" />
+              <text x="150" y="165" fill="#d5b579" font-size="9" text-anchor="middle">Интерактивна 3D Реконструкция</text>
+            </svg>
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">3D Визуализация</span>
+            <h3>Античен блясък</h3>
+            <p>Архитектурно възстановеният вид на Палестрата, Фригидариума, Тепидариума и Калдариума в пълен мащаб 1:1.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Секция „Препратки и линкове“ съгласно wireframe схемата -->
+      <section class="refs-box">
+        <h2>ПРЕПРАТКИ, ИЗТОЧНИЦИ И ЛИНКОВЕ</h2>
+        <p style="font-size: 13.5px; color: #c4cbc0; line-height: 1.6;">
+          За подготовката на проекта са използвани исторически, музейни и научни източници за археологическото наследство на Варна:
+        </p>
+
+        <div class="refs-list">
+          <a href="https://archaeo.museumvarna.com/" target="_blank" rel="noopener" class="ref-item">
+            <span class="ref-title">🏛️ Регионален исторически музей - Варна</span>
+            <span class="ref-desc">Официален портал на музея, отговарящ за опазването и експонирането на Римските терми.</span>
+          </a>
+
+          <a href="https://maps.google.com/?q=Roman+Thermae+Varna" target="_blank" rel="noopener" class="ref-item">
+            <span class="ref-title">📍 Локация на обекта в Google Maps</span>
+            <span class="ref-desc">Точни координати, снимки от посетители и навигация до ул. „Сан Стефано“ във Варна.</span>
+          </a>
+
+          <div class="ref-item">
+            <span class="ref-title">📚 Научни публикации: Проф. Михаил Мирчев</span>
+            <span class="ref-desc">„Римските терми в Одесос“ (ИВАД, 1969) – основен археологически труд за разкопките на комплекса.</span>
+          </div>
+
+          <div class="ref-item">
+            <span class="ref-title">📜 Братя Карел и Хермин Шкорпил</span>
+            <span class="ref-desc">Архивни материали на Варненското археологическо дружество и първите теренни скици от 1906 г.</span>
+          </div>
+
+          <a href="before.html" class="ref-item" style="border-color: var(--gold);">
+            <span class="ref-title">🎮 3D Визуализация: Възстановка</span>
+            <span class="ref-desc">Директен линк към интерактивната 3D разходка в сайта (Преди).</span>
+          </a>
+
+          <a href="now.html" class="ref-item" style="border-color: var(--gold);">
+            <span class="ref-title">🏛️ 3D Визуализация: Руини</span>
+            <span class="ref-desc">Директен линк към 3D модела на съвременното състояние на руините (Сега).</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Футър съгласно схемата -->
+    <footer class="site-footer">
+      <div class="footer-team">
+        Отбор „Одесос“
+        <span>Ученически проект · Римските терми във Варна</span>
+      </div>
+      <div class="footer-contacts">
+        <strong>Контакти:</strong> гр. Варна, ул. „Сан Стефано“ / ул. „Хан Крум“ ·
+        <a href="https://maps.google.com/?q=Roman+Thermae+Varna" target="_blank" rel="noopener">Google Maps</a>
+      </div>
+    </footer>
+  </body>
+</html>

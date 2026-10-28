@@ -15,9 +15,15 @@ export default defineConfig(() => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
+          history: path.resolve(__dirname, 'history.html'),
+          where: path.resolve(__dirname, 'where.html'),
+          when: path.resolve(__dirname, 'when.html'),
+          why: path.resolve(__dirname, 'why.html'),
+          how: path.resolve(__dirname, 'how.html'),
           before: path.resolve(__dirname, 'before.html'),
           now: path.resolve(__dirname, 'now.html'),
           after: path.resolve(__dirname, 'after.html'),
+          gallery: path.resolve(__dirname, 'gallery.html'),
         },
       },
     },

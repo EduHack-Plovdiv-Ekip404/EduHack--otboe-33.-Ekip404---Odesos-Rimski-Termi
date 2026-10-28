@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Одесос | История на Римските терми</title>
+    <meta name="description" content="История на Римските терми в Одесос: Къде, Кога, Защо и Как е построен най-големият античен комплекс в България." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Заглавна част / Хедър и Меню -->
+    <nav aria-label="Главна навигация">
+      <a href="index.html" class="brand">
+        ОДЕСОС
+        <small>АРХИТЕКТУРА НА АНТИЧНОСТТА</small>
+      </a>
+      <button class="nav-toggle" aria-label="Отвори менюто" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-btn">Начало</a>
+        <a href="history.html" class="nav-btn active" aria-current="page">История</a>
+        <div class="nav-dropdown">
+          <a href="before.html" class="nav-btn">Визуализация ▾</a>
+          <div class="dropdown-menu">
+            <a href="before.html">3D Преди (Възстановка)</a>
+            <a href="now.html">3D Сега (Руини)</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-btn">Галерия</a>
+      </div>
+    </nav>
+    <script src="nav.js"></script>
+
+    <div class="page-container">
+      <!-- ГЛАВА и Въведение съгласно чертежа на PDF файла -->
+      <header class="page-header">
+        <span class="eyebrow">Вътрешна страница · Хроника и памет</span>
+        <h1>ИСТОРИЯ НА РИМСКИТЕ ТЕРМИ</h1>
+        <p class="page-intro">
+          Построени в края на II в. сл.Хр., Големите терми на Одесос са четвъртите по големина запазени римски бани в Европа и най-голямата антична обществена постройка в днешна България. Комплексът е бил не само място за хигиена, но и културният, социален и интелектуален център на града.
+        </p>
+      </header>
+
+      <!-- Навигационни табове към 4-те отделни страници / блока -->
+      <div class="blocks-nav">
+        <a href="where.html" class="nav-btn">📍 Къде (Одесос)</a>
+        <a href="when.html" class="nav-btn">⏳ Кога (Хронология)</a>
+        <a href="why.html" class="nav-btn">🏛️ Защо (Живот и ритуал)</a>
+        <a href="how.html" class="nav-btn">📐 Как (Скица и градеж)</a>
+      </div>
+
+      <!-- 4-те Блока в 4 колони съгласно wireframe схемата -->
+      <div class="blocks-grid">
+        <!-- БЛОК 1: КЪДЕ -->
+        <article class="block-card" id="block-where">
+          <span class="block-badge">Блок 1 · Къде</span>
+          <h2>Снимка & Локация</h2>
+          <div class="block-body">
+            <p>
+              Термите са разположени в югоизточната част на античния Одесос, на терасовиден скат, спускащ се към Черноморския залив.
+            </p>
+            <div class="block-visual">
+              <svg viewBox="0 0 200 130" style="background:#10201a; width:100%; height:auto;">
+                <!-- Схематична карта на Одесос -->
+                <rect x="0" y="0" width="200" height="130" fill="#142621" />
+                <!-- Морето -->
+                <path d="M 0 95 Q 50 85 100 95 T 200 80 L 200 130 L 0 130 Z" fill="#1b3c3b" />
+                <text x="140" y="115" fill="#58a59b" font-size="8" font-family="sans-serif">ЧЕРНО МОРЕ</text>
+                <!-- Крепостна стена на Одесос -->
+                <path d="M 25 15 L 175 15 L 175 80 L 25 80 Z" fill="none" stroke="#d5b579" stroke-width="1.5" stroke-dasharray="3,2" />
+                <text x="100" y="25" fill="#d5b579" font-size="7" font-weight="bold" text-anchor="middle">АНТИЧЕН ОДЕСОС</text>
+                <!-- Локация на Термите -->
+                <rect x="90" y="45" width="40" height="30" fill="#a76140" rx="2" stroke="#fff" stroke-width="0.8" />
+                <circle cx="110" cy="60" r="3" fill="#ffd166" />
+                <text x="110" y="55" fill="#fff" font-size="6.5" font-weight="bold" text-anchor="middle">ТЕРМИ</text>
+                <!-- Днешно местоположение -->
+                <text x="100" y="90" fill="#a8b3aa" font-size="6" text-anchor="middle">дн. Гръцка махала · Варна</text>
+              </svg>
+            </div>
+            <p>
+              Днес руините се намират между улиците „Сан Стефано“ и „Хан Крум“ във Варна, само на няколко минути пеша от Морската градина и пристанището.
+            </p>
+          </div>
+          <div style="margin-top: 14px;">
+            <a href="where.html" class="primary" style="padding: 7px 12px; font-size: 11px; width: 100%; justify-content: center;">Отвори страница „Къде“ →</a>
+          </div>
+        </article>
+
+        <!-- БЛОК 2: КОГА -->
+        <article class="block-card" id="block-when">
+          <span class="block-badge">Блок 2 · Кога</span>
+          <h2>Времева линия</h2>
+          <div class="block-body">
+            <p>
+              Хронологичен път през епохите — от древногръцката колония до спасяването на паметника от братя Шкорпил.
+            </p>
+            <div style="margin: 12px 0; border-left: 2px solid var(--gold); padding-left: 12px; font-size: 12px; display: flex; flex-direction: column; gap: 8px;">
+              <div>
+                <strong style="color: var(--gold);">VI в. пр.Хр.</strong>
+                <span style="display:block; color:#a8b3aa;">Основаване на Одесос от милетски гърци.</span>
+              </div>
+              <div>
+                <strong style="color: var(--gold);">15 г. сл.Хр.</strong>
+                <span style="display:block; color:#a8b3aa;">Градът влиза в Римската империя (провинция Мезия).</span>
+              </div>
+              <div>
+                <strong style="color: var(--gold);">края на II в.</strong>
+                <span style="display:block; color:#a8b3aa;">Строеж на грандиозните терми (имп. Септимий Север).</span>
+              </div>
+              <div>
+                <strong style="color: var(--gold);">края на III в.</strong>
+                <span style="display:block; color:#a8b3aa;">Залез след готски нашествия; спиране на водопровода.</span>
+              </div>
+              <div>
+                <strong style="color: var(--gold);">1906 г.</strong>
+                <span style="display:block; color:#a8b3aa;">Първи научни разкопки от братя Шкорпил.</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 14px;">
+            <a href="when.html" class="primary" style="padding: 7px 12px; font-size: 11px; width: 100%; justify-content: center;">Отвори страница „Кога“ →</a>
+          </div>
+        </article>
+
+        <!-- БЛОК 3: ЗАЩО -->
+        <article class="block-card" id="block-why">
+          <span class="block-badge">Блок 3 · Защо</span>
+          <h2>Социален живот</h2>
+          <div class="block-body">
+            <p>
+              Защо римляните са отделяли толкова ресурси за баните? Те са били социалното сърце на обществото:
+            </p>
+            <ul style="padding-left: 16px; margin: 10px 0; font-size: 12.5px; color: #c4cbc0; line-height: 1.6;">
+              <li><strong>Хигиена & Здраве:</strong> Грижа за тялото чрез топлинен шок (горещ калдариум и леден фригидариум).</li>
+              <li><strong>Спорт & Игри:</strong> Тренировки по борба, гимнастика и лека атлетика в палестрата.</li>
+              <li><strong>Политика & Сделки:</strong> Търговци и сенатори сключвали морски договори по мраморните скамейки.</li>
+              <li><strong>Богове-пазители:</strong> Почит към лечителите Асклепий, Хигия и Аполон.</li>
+            </ul>
+            <p style="font-size: 11.5px; color: var(--gold); margin-top: 8px;">
+              « Mens sana in corpore sano » (Здрав дух в здраво тяло).
+            </p>
+          </div>
+          <div style="margin-top: 14px;">
+            <a href="why.html" class="primary" style="padding: 7px 12px; font-size: 11px; width: 100%; justify-content: center;">Отвори страница „Защо“ →</a>
+          </div>
+        </article>
+
+        <!-- БЛОК 4: КАК -->
+        <article class="block-card" id="block-how">
+          <span class="block-badge">Блок 4 · Как</span>
+          <h2>Скица & Градеж</h2>
+          <div class="block-body">
+            <p>
+              Инженерните тайни на римското строителство, запазили стените високи до 20 метра:
+            </p>
+            <div class="block-visual">
+              <svg viewBox="0 0 160 100" style="background:#0f1715; width:100%; height:auto;">
+                <!-- Схематичен разрез на хипокауст -->
+                <rect x="10" y="30" width="140" height="8" fill="#d5b579" />
+                <text x="80" y="25" fill="#d5b579" font-size="6" text-anchor="middle">ПОД (Suspensura)</text>
+                <!-- Колонки pilae -->
+                <rect x="25" y="38" width="10" height="35" fill="#a76140" />
+                <rect x="55" y="38" width="10" height="35" fill="#a76140" />
+                <rect x="95" y="38" width="10" height="35" fill="#a76140" />
+                <rect x="125" y="38" width="10" height="35" fill="#a76140" />
+                <!-- Пещ / пламък -->
+                <circle cx="20" cy="85" r="7" fill="#e76f51" />
+                <text x="20" y="87" fill="#fff" font-size="5" text-anchor="middle">ПЕЩ</text>
+                <path d="M 28 85 Q 70 65 140 70" stroke="#f4a261" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
+                <text x="80" y="60" fill="#f4a261" font-size="5.5" text-anchor="middle">Горещ въздух (Хипокауст)</text>
+              </svg>
+            </div>
+            <p>
+              <strong>Opus Mixtum:</strong> Редуване на каменни блокове с червени тухлени пояси за устойчивост при земетресения. 15 км акведукт носел чиста изворна вода.
+            </p>
+          </div>
+          <div style="margin-top: 14px;">
+            <a href="how.html" class="primary" style="padding: 7px 12px; font-size: 11px; width: 100%; justify-content: center;">Отвори страница „Как“ →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Футър съгласно схемата -->
+    <footer class="site-footer">
+      <div class="footer-team">
+        Отбор „Одесос“
+        <span>Ученически проект · Римските терми във Варна</span>
+      </div>
+      <div class="footer-contacts">
+        <strong>Контакти:</strong> гр. Варна, ул. „Сан Стефано“ / ул. „Хан Крум“ ·
+        <a href="https://maps.google.com/?q=Roman+Thermae+Varna" target="_blank" rel="noopener">Google Maps</a>
+      </div>
+    </footer>
+  </body>
+</html>
