@@ -1,5 +1,5 @@
 /**
- * Mobile Navigation Hamburger Menu Toggle
+ * Mobile Navigation Hamburger Menu Toggle for Roman Thermae of Odessos
  */
 document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.querySelector('.nav-toggle');

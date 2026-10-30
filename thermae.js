@@ -514,13 +514,27 @@ function mkView(id, ruins) {
   const el = document.getElementById(id);
   if (!el) return null;
   el.innerHTML = `
-    <aside class="info">
-      <span class="eyebrow">${ruins ? 'Следите на времето' : 'Архитектурна възстановка'}</span>
+    <button class="info-toggle-btn" aria-label="Информация за помещението" aria-expanded="false" title="Информация за залата">
+      <span class="info-toggle-label">Общ изглед</span>
+      <span class="info-toggle-arrow">▾</span>
+    </button>
+    <aside class="info" aria-label="Информация за помещението">
+      <div class="info-header-bar">
+        <span class="eyebrow">${ruins ? 'Следите на времето' : 'Архитектурна възстановка'}</span>
+        <button class="info-close-btn" aria-label="Затвори информационния панел" title="Затвори">✕</button>
+      </div>
       <h2></h2>
       <p></p>
       <footer>ИЛЮСТРАТИВНА РЕКОНСТРУКЦИЯ · 1 ЕД. = 1 М</footer>
     </aside>
-    <div class="toolbar">
+    <button class="options-toggle-btn" aria-label="Опции на изгледа" aria-expanded="false" title="Опции">
+      <span class="options-toggle-label">Опции</span>
+    </button>
+    <div class="toolbar" aria-label="Опции на изгледа">
+      <div class="toolbar-header">
+        <span class="toolbar-title">Опции</span>
+        <button class="toolbar-close-btn" aria-label="Затвори опциите" title="Затвори">✕</button>
+      </div>
       <button data-action="overview">↗ Общ изглед</button>
       <label class="option-check">
         <input type="checkbox" data-action="visitor-opt" checked />
@@ -529,6 +543,11 @@ function mkView(id, ruins) {
       <button data-action="roof" aria-pressed="true">🏛️ Махни покривите</button>
       <label>Качество<select aria-label="Качество"><option value="high">Високо</option><option value="low">Икономично</option></select></label>
     </div>
+    <button class="rooms-toggle-btn" aria-label="Избери помещение" aria-expanded="false" title="Избери помещение">
+      <svg class="rooms-toggle-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
     <div class="bar" aria-label="Помещения"></div>
     <div class="hint">Плъзни за завъртане · Колелце за приближаване · Десен бутон за преместване</div>
   `;
@@ -695,16 +714,118 @@ function mkView(id, ruins) {
     return { c: ROOMS[k].c, t: ROOMS[k].t };
   }
 
+  const toggleBtn = el.querySelector('.info-toggle-btn');
+  const infoAside = el.querySelector('.info');
+  const closeBtn = el.querySelector('.info-close-btn');
+  const toggleLabel = el.querySelector('.info-toggle-label');
+  const toggleArrow = el.querySelector('.info-toggle-arrow');
+
+  function toggleInfo(open) {
+    if (!infoAside) return;
+    const shouldOpen = open !== undefined ? open : !infoAside.classList.contains('open');
+    infoAside.classList.toggle('open', shouldOpen);
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-expanded', String(shouldOpen));
+      toggleBtn.classList.toggle('active', shouldOpen);
+      if (toggleArrow) toggleArrow.textContent = shouldOpen ? '▴' : '▾';
+    }
+  }
+
+  if (toggleBtn) {
+    toggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleInfo();
+    };
+  }
+
+  if (closeBtn) {
+    closeBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleInfo(false);
+    };
+  }
+
+  const roomsToggleBtn = el.querySelector('.rooms-toggle-btn');
+  const bar = el.querySelector('.bar');
+
+  function toggleRoomsDropup(open) {
+    if (!bar) return;
+    const shouldOpen = open !== undefined ? open : !bar.classList.contains('open');
+    bar.classList.toggle('open', shouldOpen);
+    if (roomsToggleBtn) {
+      roomsToggleBtn.setAttribute('aria-expanded', String(shouldOpen));
+      roomsToggleBtn.classList.toggle('active', shouldOpen);
+    }
+  }
+
+  if (roomsToggleBtn) {
+    roomsToggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleRoomsDropup();
+    };
+  }
+
+  const optionsToggleBtn = el.querySelector('.options-toggle-btn');
+  const toolbar = el.querySelector('.toolbar');
+  const toolbarCloseBtn = el.querySelector('.toolbar-close-btn');
+
+  function toggleToolbar(open) {
+    if (!toolbar) return;
+    const shouldOpen = open !== undefined ? open : !toolbar.classList.contains('open');
+    toolbar.classList.toggle('open', shouldOpen);
+    if (optionsToggleBtn) {
+      optionsToggleBtn.setAttribute('aria-expanded', String(shouldOpen));
+      optionsToggleBtn.classList.toggle('active', shouldOpen);
+    }
+  }
+
+  if (optionsToggleBtn) {
+    optionsToggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleToolbar();
+    };
+  }
+
+  if (toolbarCloseBtn) {
+    toolbarCloseBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleToolbar(false);
+    };
+  }
+
+  const handleDocumentClick = (e) => {
+    if (infoAside && infoAside.classList.contains('open')) {
+      if (!infoAside.contains(e.target) && (!toggleBtn || !toggleBtn.contains(e.target))) {
+        toggleInfo(false);
+      }
+    }
+    if (bar && bar.classList.contains('open')) {
+      if (!bar.contains(e.target) && (!roomsToggleBtn || !roomsToggleBtn.contains(e.target))) {
+        toggleRoomsDropup(false);
+      }
+    }
+    if (toolbar && toolbar.classList.contains('open')) {
+      if (!toolbar.contains(e.target) && (!optionsToggleBtn || !optionsToggleBtn.contains(e.target))) {
+        toggleToolbar(false);
+      }
+    }
+  };
+  document.addEventListener('click', handleDocumentClick);
+
   function go(k) {
     selected = k;
     el.querySelector('h2').textContent = ROOMS[k].n;
     el.querySelector('.info p').textContent = ruins ? 'Условен изглед на разрушението. ' + ROOMS[k].r : ROOMS[k].d;
+    if (toggleLabel) toggleLabel.textContent = ROOMS[k].n;
     el.querySelectorAll('.bar button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === k)));
     const target = getCameraTargetForRoom(k, visitorMode);
     travel(target.c, target.t);
+
+    if (window.innerWidth <= 768) {
+      toggleRoomsDropup(false);
+    }
   }
 
-  const bar = el.querySelector('.bar');
   KEYS.forEach(k => {
     const b = document.createElement('button');
     b.textContent = ROOMS[k].n;
