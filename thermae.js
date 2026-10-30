@@ -828,6 +828,9 @@ function mkView(id, ruins) {
   let yaw = 0, pitch = 0;
   let walkPhase = 0;
   const moveKeys = { forward: false, backward: false, left: false, right: false, sprint: false };
+  const _forward = new THREE.Vector3();
+  const _right = new THREE.Vector3();
+  const _moveDir = new THREE.Vector3();
 
   const freeroamBtn = el.querySelector('[data-action="freeroam"]');
   const freeroamHud = el.querySelector('.freeroam-hud');
@@ -1029,19 +1032,20 @@ function mkView(id, ruins) {
       elapsed += dt;
       landscape.wind.value = elapsed;
       if (isFreeRoam) {
-        let vx = 0, vz = 0;
-        if (moveKeys.forward) { vx -= Math.sin(yaw); vz -= Math.cos(yaw); }
-        if (moveKeys.backward) { vx += Math.sin(yaw); vz += Math.cos(yaw); }
-        if (moveKeys.left) { vx -= Math.cos(yaw); vz += Math.sin(yaw); }
-        if (moveKeys.right) { vx += Math.cos(yaw); vz += Math.sin(yaw); }
+        _moveDir.set(0, 0, 0);
+        _forward.set(-Math.sin(yaw), 0, -Math.cos(yaw)).normalize();
+        _right.set(-_forward.z, 0, _forward.x);
 
-        const len = Math.hypot(vx, vz);
+        if (moveKeys.forward) _moveDir.add(_forward);
+        if (moveKeys.backward) _moveDir.sub(_forward);
+        if (moveKeys.right) _moveDir.add(_right);
+        if (moveKeys.left) _moveDir.sub(_right);
+
+        const len = _moveDir.length();
         if (len > 0.0001) {
-          vx /= len;
-          vz /= len;
+          _moveDir.normalize();
           const speed = (moveKeys.sprint ? 9.5 : 4.5) * dt;
-          cam.position.x += vx * speed;
-          cam.position.z += vz * speed;
+          cam.position.addScaledVector(_moveDir, speed);
 
           walkPhase += dt * (moveKeys.sprint ? 14 : 9);
         }

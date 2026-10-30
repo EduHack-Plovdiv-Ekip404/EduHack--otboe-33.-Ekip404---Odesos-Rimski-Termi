@@ -924,15 +924,57 @@ h1 em {
   margin-top: 20px;
 }
 
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
+}
+
 @media (max-width: 1024px) {
   .blocks-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .page-container {
+    padding: 85px 16px 40px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .page-header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+  }
+  .page-header h1 {
+    font-size: clamp(24px, 7vw, 36px);
+  }
+  .page-intro {
+    font-size: 14.5px;
+  }
+  .blocks-nav {
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .blocks-nav button, .blocks-nav a {
+    padding: 8px 12px;
+    font-size: 11.5px;
+    letter-spacing: 0.8px;
+  }
   .blocks-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .two-col-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .block-card {
+    padding: 18px 16px;
   }
 }
 
@@ -945,6 +987,25 @@ h1 em {
   flex-direction: column;
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   backdrop-filter: blur(10px);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.block-visual {
+  margin: 12px 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.block-visual svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .block-card:hover {
@@ -1000,9 +1061,16 @@ h1 em {
 /* Gallery & References Styles */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 22px;
   margin-bottom: 50px;
+}
+
+@media (max-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .gallery-card {
