@@ -536,12 +536,24 @@ function mkView(id, ruins) {
         <button class="toolbar-close-btn" aria-label="Затвори опциите" title="Затвори">✕</button>
       </div>
       <button data-action="overview">↗ Общ изглед</button>
+      <button data-action="freeroam" class="freeroam-btn">🚶 Свободна разходка</button>
       <label class="option-check">
         <input type="checkbox" data-action="visitor-opt" checked />
         <span>Ниво на посетителя</span>
       </label>
       <button data-action="roof" aria-pressed="true">🏛️ Махни покривите</button>
       <label>Качество<select aria-label="Качество"><option value="high">Високо</option><option value="low">Икономично</option></select></label>
+    </div>
+    <div class="freeroam-hud" hidden>
+      <div class="freeroam-hud-header">
+        <span class="freeroam-hud-badge">🚶 СВОБОДНА РАЗХОДКА (FREE ROAM)</span>
+        <button class="freeroam-exit-btn" aria-label="Изход от свободната разходка" title="Изход (Esc)">✕ Изход</button>
+      </div>
+      <div class="freeroam-hud-controls">
+        <div class="freeroam-key-item"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> или <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> Ходене</div>
+        <div class="freeroam-key-item"><kbd>Мишка</kbd> Оглеждане</div>
+        <div class="freeroam-key-item"><kbd>Shift</kbd> Бърз ход · <kbd>Esc</kbd> Изход</div>
+      </div>
     </div>
     <button class="rooms-toggle-btn" aria-label="Избери помещение" aria-expanded="false" title="Избери помещение">
       <svg class="rooms-toggle-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -812,7 +824,121 @@ function mkView(id, ruins) {
   };
   document.addEventListener('click', handleDocumentClick);
 
+  let isFreeRoam = false;
+  let yaw = 0, pitch = 0;
+  let walkPhase = 0;
+  const moveKeys = { forward: false, backward: false, left: false, right: false, sprint: false };
+
+  const freeroamBtn = el.querySelector('[data-action="freeroam"]');
+  const freeroamHud = el.querySelector('.freeroam-hud');
+  const freeroamExitBtn = el.querySelector('.freeroam-exit-btn');
+
+  function startFreeRoam() {
+    isFreeRoam = true;
+    ct.enabled = false;
+    transition = null;
+
+    const dir = new THREE.Vector3();
+    cam.getWorldDirection(dir);
+    yaw = Math.atan2(-dir.x, -dir.z);
+    pitch = Math.asin(Math.max(-0.95, Math.min(0.95, dir.y)));
+
+    if (cam.position.y > FLOOR + 3.2 || cam.position.distanceTo(new THREE.Vector3(0, FLOOR, 0)) > 55) {
+      cam.position.set(-14, FLOOR + 1.65, 8);
+      yaw = 0.5;
+      pitch = 0.04;
+    } else {
+      cam.position.y = FLOOR + 1.65;
+    }
+
+    if (freeroamHud) freeroamHud.hidden = false;
+    if (freeroamBtn) freeroamBtn.setAttribute('aria-pressed', 'true');
+    toggleToolbar(false);
+
+    try {
+      rn.domElement.requestPointerLock?.();
+    } catch (_) {}
+  }
+
+  function stopFreeRoam() {
+    if (!isFreeRoam) return;
+    isFreeRoam = false;
+    ct.enabled = true;
+    if (document.pointerLockElement === rn.domElement) {
+      document.exitPointerLock?.();
+    }
+    if (freeroamHud) freeroamHud.hidden = true;
+    if (freeroamBtn) freeroamBtn.setAttribute('aria-pressed', 'false');
+
+    Object.keys(moveKeys).forEach(k => moveKeys[k] = false);
+
+    const dir = new THREE.Vector3();
+    cam.getWorldDirection(dir);
+    ct.target.copy(cam.position).addScaledVector(dir, 12);
+    ct.update();
+  }
+
+  if (freeroamBtn) {
+    freeroamBtn.onclick = () => {
+      if (isFreeRoam) stopFreeRoam();
+      else startFreeRoam();
+    };
+  }
+
+  if (freeroamExitBtn) {
+    freeroamExitBtn.onclick = () => stopFreeRoam();
+  }
+
+  rn.domElement.addEventListener('click', () => {
+    if (isFreeRoam && document.pointerLockElement !== rn.domElement) {
+      try {
+        rn.domElement.requestPointerLock?.();
+      } catch (_) {}
+    }
+  });
+
+  function onMouseMove(e) {
+    if (!isFreeRoam) return;
+    const isLocked = document.pointerLockElement === rn.domElement;
+    if (isLocked || (e.buttons & 1)) {
+      const movementX = e.movementX || 0;
+      const movementY = e.movementY || 0;
+      const sensitivity = 0.0024;
+      yaw -= movementX * sensitivity;
+      pitch -= movementY * sensitivity;
+      pitch = Math.max(-Math.PI / 2.3, Math.min(Math.PI / 2.3, pitch));
+    }
+  }
+  window.addEventListener('mousemove', onMouseMove);
+
+  function onKeyDown(e) {
+    if (e.code === 'Escape' && isFreeRoam) {
+      stopFreeRoam();
+      return;
+    }
+    if (!isFreeRoam) return;
+    if (['KeyW', 'ArrowUp'].includes(e.code)) { moveKeys.forward = true; e.preventDefault(); }
+    if (['KeyS', 'ArrowDown'].includes(e.code)) { moveKeys.backward = true; e.preventDefault(); }
+    if (['KeyA', 'ArrowLeft'].includes(e.code)) { moveKeys.left = true; e.preventDefault(); }
+    if (['KeyD', 'ArrowRight'].includes(e.code)) { moveKeys.right = true; e.preventDefault(); }
+    if (['ShiftLeft', 'ShiftRight'].includes(e.code)) moveKeys.sprint = true;
+  }
+
+  function onKeyUp(e) {
+    if (['KeyW', 'ArrowUp'].includes(e.code)) moveKeys.forward = false;
+    if (['KeyS', 'ArrowDown'].includes(e.code)) moveKeys.backward = false;
+    if (['KeyA', 'ArrowLeft'].includes(e.code)) moveKeys.left = false;
+    if (['KeyD', 'ArrowRight'].includes(e.code)) moveKeys.right = false;
+    if (['ShiftLeft', 'ShiftRight'].includes(e.code)) moveKeys.sprint = false;
+  }
+
+  window.addEventListener('keydown', onKeyDown);
+  window.addEventListener('keyup', onKeyUp);
+
   function go(k) {
+    if (isFreeRoam) {
+      stopFreeRoam();
+    }
     selected = k;
     el.querySelector('h2').textContent = ROOMS[k].n;
     el.querySelector('.info p').textContent = ruins ? 'Условен изглед на разрушението. ' + ROOMS[k].r : ROOMS[k].d;
@@ -902,17 +1028,48 @@ function mkView(id, ruins) {
     tick(dt) {
       elapsed += dt;
       landscape.wind.value = elapsed;
-      if (transition) {
-        transition.age += dt;
-        const u = Math.min(transition.age / 1.4, 1), e = u * u * (3 - 2 * u);
-        cam.position.lerpVectors(transition.c0, transition.c1, e);
-        ct.target.lerpVectors(transition.t0, transition.t1, e);
-        if (u === 1) transition = null;
+      if (isFreeRoam) {
+        let vx = 0, vz = 0;
+        if (moveKeys.forward) { vx -= Math.sin(yaw); vz -= Math.cos(yaw); }
+        if (moveKeys.backward) { vx += Math.sin(yaw); vz += Math.cos(yaw); }
+        if (moveKeys.left) { vx -= Math.cos(yaw); vz += Math.sin(yaw); }
+        if (moveKeys.right) { vx += Math.cos(yaw); vz += Math.sin(yaw); }
+
+        const len = Math.hypot(vx, vz);
+        if (len > 0.0001) {
+          vx /= len;
+          vz /= len;
+          const speed = (moveKeys.sprint ? 9.5 : 4.5) * dt;
+          cam.position.x += vx * speed;
+          cam.position.z += vz * speed;
+
+          walkPhase += dt * (moveKeys.sprint ? 14 : 9);
+        }
+
+        // Clamp camera position inside Roman baths boundary
+        cam.position.x = Math.max(-36, Math.min(36, cam.position.x));
+        cam.position.z = Math.max(-30, Math.min(30, cam.position.z));
+
+        const headBob = len > 0.0001 ? Math.sin(walkPhase) * 0.03 : 0;
+        cam.position.y = FLOOR + 1.65 + headBob;
+
+        const lookX = cam.position.x - Math.sin(yaw) * Math.cos(pitch);
+        const lookY = cam.position.y + Math.sin(pitch);
+        const lookZ = cam.position.z - Math.cos(yaw) * Math.cos(pitch);
+        cam.lookAt(lookX, lookY, lookZ);
+      } else {
+        if (transition) {
+          transition.age += dt;
+          const u = Math.min(transition.age / 1.4, 1), e = u * u * (3 - 2 * u);
+          cam.position.lerpVectors(transition.c0, transition.c1, e);
+          ct.target.lerpVectors(transition.t0, transition.t1, e);
+          if (u === 1) transition = null;
+        }
+        ct.dampingFactor = 1 - Math.pow(0.92, dt * 60);
+        ct.update();
+        cam.position.y = Math.max(0.6, cam.position.y);
+        ct.target.y = Math.max(0.3, ct.target.y);
       }
-      ct.dampingFactor = 1 - Math.pow(0.92, dt * 60);
-      ct.update();
-      cam.position.y = Math.max(0.6, cam.position.y);
-      ct.target.y = Math.max(0.3, ct.target.y);
       waterList.forEach(w => {
         const a = w.geometry.attributes.position;
         for (let i = 0; i < a.count; i++) {

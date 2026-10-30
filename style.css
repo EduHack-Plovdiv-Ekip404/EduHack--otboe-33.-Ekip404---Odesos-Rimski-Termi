@@ -335,6 +335,110 @@ h1 em {
   font-size: 12px;
   text-align: left;
 }
+.toolbar .freeroam-btn {
+  background: #1e332a;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 8px 10px;
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
+}
+.toolbar .freeroam-btn:hover,
+.toolbar .freeroam-btn[aria-pressed="true"] {
+  background: #d5b57930;
+  border-color: #f1cf8e;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(213, 181, 121, 0.3);
+}
+.freeroam-hud {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 35;
+  background: linear-gradient(165deg, rgba(20, 34, 30, 0.96) 0%, rgba(13, 22, 19, 0.98) 100%);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 12px 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(213, 181, 121, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+  animation: hudAppear 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  user-select: none;
+}
+.freeroam-hud[hidden] {
+  display: none !important;
+}
+@keyframes hudAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+.freeroam-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+.freeroam-hud-badge {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.freeroam-exit-btn {
+  background: rgba(213, 181, 121, 0.15);
+  border: 1px solid var(--gold);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.freeroam-exit-btn:hover {
+  background: #962828;
+  border-color: #ff7d7d;
+  color: #fff;
+}
+.freeroam-hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: #d8ded5;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.freeroam-key-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.freeroam-key-item kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: monospace;
+  font-size: 11px;
+  background: #0f1c18;
+  border: 1px solid rgba(213, 181, 121, 0.4);
+  border-radius: 4px;
+  color: var(--gold);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+}
 .option-check {
   display: flex;
   align-items: center;
@@ -648,6 +752,12 @@ h1 em {
   }
   .toolbar button {
     padding: 8px 12px;
+  }
+  .toolbar .freeroam-btn {
+    display: none !important;
+  }
+  .freeroam-hud {
+    display: none !important;
   }
   .rooms-toggle-btn {
     display: inline-flex;
