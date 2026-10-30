@@ -873,7 +873,7 @@ h1 em {
 .page-container {
   min-height: 100dvh;
   padding: 110px 6vw 60px;
-  max-width: 1360px;
+  max-width: 90%;
   margin: 0 auto;
 }
 
@@ -890,6 +890,8 @@ h1 em {
   font-size: clamp(32px, 5vw, 64px);
   margin: 10px 0 16px;
   color: var(--ink);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .page-intro {
