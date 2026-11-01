@@ -709,21 +709,23 @@ function mkView(id, ruins) {
 
   let visitorMode = true;
   let transition = null, selected = 'all', elapsed = 0;
+  const INDOOR_ROOMS = ['frig', 'tep', 'cal'];
+  let roomYaw = 0;
+  let roomPitch = 0.05;
+  let userInteractingInRoom = false;
+  let userInteractionTimer = 0;
+
   ct.addEventListener('start', () => { transition = null; });
 
-  function travel(c, t) {
-    transition = { c0: cam.position.clone(), t0: ct.target.clone(), c1: new THREE.Vector3(...c), t1: new THREE.Vector3(...t), age: 0 };
-  }
-
-  function getCameraTargetForRoom(k, isVisitor) {
-    if (k === 'all') {
-      return { c: ROOMS.all.c, t: ROOMS.all.t };
-    }
-    if (isVisitor) {
-      const x = k === 'pal' ? -25 : k === 'tep' ? 8 : k === 'cal' ? 24.5 : -6.5;
-      return { c: [x - 2, FLOOR + 1.65, 12], t: [x, FLOOR + 1.65, -5] };
-    }
-    return { c: ROOMS[k].c, t: ROOMS[k].t };
+  function travel(c, t, onDone) {
+    transition = {
+      c0: cam.position.clone(),
+      t0: ct.target.clone(),
+      c1: new THREE.Vector3(...c),
+      t1: new THREE.Vector3(...t),
+      age: 0,
+      onDone
+    };
   }
 
   const toggleBtn = el.querySelector('.info-toggle-btn');
@@ -938,6 +940,40 @@ function mkView(id, ruins) {
   window.addEventListener('keydown', onKeyDown);
   window.addEventListener('keyup', onKeyUp);
 
+  let isRoomPointerDown = false;
+  let lastRoomPointerX = 0, lastRoomPointerY = 0;
+
+  rn.domElement.addEventListener('pointerdown', (e) => {
+    if (INDOOR_ROOMS.includes(selected) && !isFreeRoam) {
+      isRoomPointerDown = true;
+      lastRoomPointerX = e.clientX;
+      lastRoomPointerY = e.clientY;
+      userInteractingInRoom = true;
+      userInteractionTimer = 2.0;
+    }
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if (isRoomPointerDown && INDOOR_ROOMS.includes(selected) && !isFreeRoam) {
+      const dx = e.clientX - lastRoomPointerX;
+      const dy = e.clientY - lastRoomPointerY;
+      lastRoomPointerX = e.clientX;
+      lastRoomPointerY = e.clientY;
+
+      roomYaw -= dx * 0.003;
+      roomPitch = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, roomPitch + dy * 0.003));
+      userInteractingInRoom = true;
+      userInteractionTimer = 2.0;
+    }
+  });
+
+  window.addEventListener('pointerup', () => {
+    isRoomPointerDown = false;
+  });
+  window.addEventListener('pointercancel', () => {
+    isRoomPointerDown = false;
+  });
+
   function go(k) {
     if (isFreeRoam) {
       stopFreeRoam();
@@ -947,8 +983,44 @@ function mkView(id, ruins) {
     el.querySelector('.info p').textContent = ruins ? 'Условен изглед на разрушението. ' + ROOMS[k].r : ROOMS[k].d;
     if (toggleLabel) toggleLabel.textContent = ROOMS[k].n;
     el.querySelectorAll('.bar button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === k)));
-    const target = getCameraTargetForRoom(k, visitorMode);
-    travel(target.c, target.t);
+
+    ct.autoRotate = false;
+
+    if (k === 'all') {
+      ct.enabled = true;
+      travel(ROOMS.all.c, ROOMS.all.t);
+    } else if (k === 'pal') {
+      // Палестра: камерата се върти ОКОЛО стаята (орбитално около двора)
+      ct.enabled = true;
+      const c = [-44, 22, 28];
+      const t = [-25, 3, 0];
+      travel(c, t, () => {
+        if (selected === 'pal') {
+          ct.target.set(-25, 3, 0);
+          ct.autoRotate = true;
+          ct.autoRotateSpeed = 0.8;
+        }
+      });
+    } else if (INDOOR_ROOMS.includes(k)) {
+      // Стаите (Фригидариум, Тепидариум, Калдариум):
+      // Камерата е В стаята на ниво на посетител и бавно се върти 360 градуса хоризонтално!
+      ct.enabled = false;
+      const rx = k === 'cal' ? 24.5 : k === 'tep' ? 8 : -6.5;
+      const rz = k === 'tep' ? 0 : 10;
+      const camPos = [rx, FLOOR + 1.65, rz];
+      roomYaw = 0; // гледа на север (-Z) по дължината на залата/басейна
+      roomPitch = 0.05;
+      userInteractingInRoom = false;
+      userInteractionTimer = 0;
+
+      const lookDist = 10;
+      const lookPos = [
+        rx - Math.sin(roomYaw) * Math.cos(roomPitch) * lookDist,
+        FLOOR + 1.65 + Math.sin(roomPitch) * lookDist,
+        rz - Math.cos(roomYaw) * Math.cos(roomPitch) * lookDist
+      ];
+      travel(camPos, lookPos);
+    }
 
     if (window.innerWidth <= 768) {
       toggleRoomsDropup(false);
@@ -970,10 +1042,7 @@ function mkView(id, ruins) {
     visitorCheckbox.checked = visitorMode;
     visitorCheckbox.onchange = e => {
       visitorMode = e.target.checked;
-      if (selected !== 'all') {
-        const target = getCameraTargetForRoom(selected, visitorMode);
-        travel(target.c, target.t);
-      }
+      go(selected);
     };
   }
 
@@ -1067,12 +1136,43 @@ function mkView(id, ruins) {
           const u = Math.min(transition.age / 1.4, 1), e = u * u * (3 - 2 * u);
           cam.position.lerpVectors(transition.c0, transition.c1, e);
           ct.target.lerpVectors(transition.t0, transition.t1, e);
-          if (u === 1) transition = null;
+          cam.lookAt(ct.target);
+          if (u === 1) {
+            const cb = transition.onDone;
+            transition = null;
+            if (cb) cb();
+          }
+        } else if (INDOOR_ROOMS.includes(selected)) {
+          // Камерата е В стаята и бавно се върти 360 градуса хоризонтално
+          const rx = selected === 'cal' ? 24.5 : selected === 'tep' ? 8 : -6.5;
+          const rz = selected === 'tep' ? 0 : 10;
+          const ry = FLOOR + 1.65;
+
+          cam.position.set(rx, ry, rz);
+
+          if (!userInteractingInRoom) {
+            roomYaw += dt * 0.09; // бавно и плавно хоризонтално въртене (~70 сек. за пълен оборот от 360 градуса)
+          } else {
+            userInteractionTimer -= dt;
+            if (userInteractionTimer <= 0) {
+              userInteractingInRoom = false;
+            }
+          }
+
+          const lookDist = 10;
+          const tx = rx - Math.sin(roomYaw) * Math.cos(roomPitch) * lookDist;
+          const ty = ry + Math.sin(roomPitch) * lookDist;
+          const tz = rz - Math.cos(roomYaw) * Math.cos(roomPitch) * lookDist;
+
+          ct.target.set(tx, ty, tz);
+          cam.lookAt(tx, ty, tz);
+        } else {
+          // OrbitControls за Палестра (autoRotate около двора) и Общ изглед
+          ct.dampingFactor = 1 - Math.pow(0.92, dt * 60);
+          ct.update();
+          cam.position.y = Math.max(0.6, cam.position.y);
+          ct.target.y = Math.max(0.3, ct.target.y);
         }
-        ct.dampingFactor = 1 - Math.pow(0.92, dt * 60);
-        ct.update();
-        cam.position.y = Math.max(0.6, cam.position.y);
-        ct.target.y = Math.max(0.3, ct.target.y);
       }
       waterList.forEach(w => {
         const a = w.geometry.attributes.position;
