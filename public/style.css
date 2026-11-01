@@ -873,7 +873,7 @@ h1 em {
 .page-container {
   min-height: 100dvh;
   padding: 110px 6vw 60px;
-  max-width: 1360px;
+  max-width: 90%;
   margin: 0 auto;
 }
 
@@ -882,14 +882,26 @@ h1 em {
   margin-bottom: 40px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header .eyebrow {
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .page-header h1 {
   font-family: Georgia, serif;
   font-weight: normal;
   font-size: clamp(32px, 5vw, 64px);
-  margin: 10px 0 16px;
+  margin: 10px auto 16px;
   color: var(--ink);
+  max-width: 960px;
+  width: 100%;
+  text-align: center;
 }
 
 .page-intro {
@@ -898,6 +910,7 @@ h1 em {
   color: #c7cec4;
   max-width: 800px;
   margin: 0 auto;
+  text-align: center;
 }
 
 /* 4-Column Blocks (КЪДЕ, КОГА, ЗАЩО, КАК) */
