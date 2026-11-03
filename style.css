@@ -199,7 +199,7 @@ h1 em {
   z-index: 3;
   left: 22px;
   top: 22px;
-  width: 280px;
+  width: 340px;
   padding: 23px;
   background: var(--panel);
   border: 1px solid var(--line);
@@ -1259,5 +1259,14 @@ h1 em {
 .dropdown-menu a:hover, .dropdown-menu a.active {
   background: #d5b57922;
   color: var(--gold);
+}
+
+.video-video-room-info {
+	border-radius: 5px;
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 2px solid rgba(213, 181, 121, 1);
 }
 
