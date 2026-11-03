@@ -57,6 +57,24 @@ nav {
   color: var(--gold);
   font-size: 23px;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.brand-text {
+  display: inline-flex;
+  flex-direction: column;
 }
 .nav-links {
   display: flex;
@@ -538,8 +556,13 @@ h1 em {
     gap: 0;
   }
   .brand {
-    font-size: 20px;
-    letter-spacing: 3px;
+    font-size: 19px;
+    letter-spacing: 2px;
+    gap: 8px;
+  }
+  .brand-logo {
+    width: 38px;
+    height: 38px;
   }
   .brand small {
     display: none;

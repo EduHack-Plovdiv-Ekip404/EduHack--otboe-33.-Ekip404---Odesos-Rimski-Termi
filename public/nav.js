@@ -2,6 +2,16 @@
  * Mobile Navigation Hamburger Menu Toggle for Roman Thermae of Odessos
  */
 document.addEventListener('DOMContentLoaded', () => {
+  // Ensure logo is always displayed to the left of the brand link
+  const brand = document.querySelector('.brand');
+  if (brand && !brand.querySelector('.brand-logo')) {
+    const img = document.createElement('img');
+    img.src = 'assets/aistudio/emblem_transparent_c3ec1952.png';
+    img.alt = 'Екип 404 - Одесос';
+    img.className = 'brand-logo';
+    brand.prepend(img);
+  }
+
   const toggleBtn = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (!toggleBtn || !navLinks) return;
