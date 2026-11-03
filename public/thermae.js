@@ -7,6 +7,7 @@ const ROOMS = {
     c: [-63, 49, 66],
     t: [0, 3, 0],
     r: 'Днес са оцелели основите и части от зидовете. Руините са най-голямата антична сграда, видима в днешна Варна.',
+	v: 'https://cdn.jsdelivr.net/gh/Wiz6rd/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/obshtizgled.mp4'
   },
   pal: {
     n: 'Палестра',
