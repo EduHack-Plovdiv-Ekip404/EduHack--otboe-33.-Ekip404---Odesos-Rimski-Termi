@@ -7,7 +7,7 @@ const ROOMS = {
     c: [-63, 49, 66],
     t: [0, 3, 0],
     r: 'Днес са оцелели основите и части от зидовете. Руините са най-голямата антична сграда, видима в днешна Варна.',
-	v: 'https://cdn.jsdelivr.net/gh/Wiz6rd/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/obshtizgled.mp4'
+    v: 'https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/obshtizgled.mp4'
   },
   pal: {
     n: 'Палестра',
@@ -15,7 +15,7 @@ const ROOMS = {
     c: [-42, 20, 27],
     t: [-25, 3, 0],
     r: 'От двора са останали основи и разпилени колонни барабани.',
-    v: 'https://cdn.jsdelivr.net/gh/Wiz6rd/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/2.mp4'
+    v: 'https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/2.mp4'
   },
   frig: {
     n: 'Фригидариум',
@@ -23,7 +23,7 @@ const ROOMS = {
     c: [-23, 22, 29],
     t: [-6.5, 3, 0],
     r: 'Подът и стените са силно разрушени; личи само планът на залата.',
-    v: 'https://cdn.jsdelivr.net/gh/Wiz6rd/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/frigidarium.mp4'
+    v: 'https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/frigidarium.mp4'
   },
   tep: {
     n: 'Тепидариум',
@@ -31,7 +31,7 @@ const ROOMS = {
     c: [-2, 19, 25],
     t: [8, 3, 0],
     r: 'Запазени са части от преградните зидове.',
-    v: 'https://cdn.jsdelivr.net/gh/Wiz6rd/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/tepidarium.mp4'
+    v: 'https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/tepidarium.mp4'
   },
   cal: {
     n: 'Калдариум',
@@ -39,7 +39,7 @@ const ROOMS = {
     c: [13, 24, 31],
     t: [24.5, 3, 0],
     r: 'Видими са тухлените колонки (pilae) на подподовото отопление.',
-    v: 'https://cdn.jsdelivr.net/gh/Wiz6rd/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/kaldarium.mp4'
+    v: 'https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/videos/kaldarium.mp4'
   }
 };
 
