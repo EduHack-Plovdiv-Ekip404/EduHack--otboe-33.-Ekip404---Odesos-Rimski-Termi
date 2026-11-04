@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import 'dotenv/config';
+import { createServer as createViteServer } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,8 +23,9 @@ async function startServer() {
 
   const cliPort = getArg('--port') || getArg('-p');
   const cliHost = getArg('--host') || getArg('-h');
-  const port = Number(process.env.PORT) || (cliPort ? Number(cliPort) : 3000);
-  const host = cliHost || process.env.HOST || '0.0.0.0';
+  // In AI Studio, the dev server must always bind to port 3000 (never process.env.PORT which is 8080 used by Nginx)
+  const port = cliPort ? Number(cliPort) : 3000;
+  const host = cliHost || '0.0.0.0';
 
   app.use(express.json());
 
@@ -34,6 +36,16 @@ async function startServer() {
 
   const distDir = path.resolve(__dirname, 'dist');
   const hasDist = fs.existsSync(distDir);
+
+  // Mount Vite middleware in development
+  const isProd = process.env.NODE_ENV === 'production';
+  if (!isProd) {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: 'custom',
+    });
+    app.use(vite.middlewares);
+  }
 
   // Serve static files from workspace root and public folder
   app.use(express.static(path.resolve(__dirname, 'public')));

@@ -44,7 +44,55 @@
 
       <!-- Галерия карти -->
       <div class="gallery-grid">
-        <!-- Карта 1: Руините днес -->
+        <!-- Карта 1: Хидравлична система (3D разрез) -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <img src="https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/assets/gallery-hydraulic-3d.jfif" onerror="this.onerror=null; this.src='assets/gallery-hydraulic-3d.jfif'" alt="Хидравличната система на термите (3D разрез)" loading="lazy" />
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">3D Архитектурен разрез</span>
+            <h3>Хидравличната система на термите</h3>
+            <p>Изометричен разрез, показващ пътя на водата от акведукта през подземните цистерни и басейните до масивните отводнителни канали към Черно море.</p>
+          </div>
+        </div>
+
+        <!-- Карта 2: Древната римска хидравлична система (Скица) -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <img src="https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/assets/gallery-hydraulic-sketch.jfif" onerror="this.onerror=null; this.src='assets/gallery-hydraulic-sketch.jfif'" alt="Древната римска хидравлична система" loading="lazy" />
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Историческа скица</span>
+            <h3>Древната римска хидравлична система</h3>
+            <p>Класически архитектурен чертеж върху пергамент на сложната водопроводна мрежа от оловни и глинени тръби (fistulae), цистерни и отводнителни клоаки на Големите терми.</p>
+          </div>
+        </div>
+
+        <!-- Карта 3: Устройство на хипокауста (3D модел) -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <img src="https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/assets/gallery-hypocaust-3d.jfif" onerror="this.onerror=null; this.src='assets/gallery-hypocaust-3d.jfif'" alt="Устройство на хипокауста и пещите" loading="lazy" />
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Инженерна реконструкция</span>
+            <h3>Устройство на хипокауста и пещите</h3>
+            <p>Детайлен напречен срез, разкриващ действието на пещта (praefurnium), тухлените колонки (pilae) под двойния под и кухите стенни тръби (tubuli), отвеждащи горещия въздух.</p>
+          </div>
+        </div>
+
+        <!-- Карта 4: Архитектурен план и обемна реконструкция -->
+        <div class="gallery-card">
+          <div class="gallery-card-img">
+            <img src="https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/assets/gallery-architecture-sketch.jfif" onerror="this.onerror=null; this.src='assets/gallery-architecture-sketch.jfif'" alt="Цялостен архитектурен план и реконструкция" loading="lazy" />
+          </div>
+          <div class="gallery-card-info">
+            <span class="block-badge" style="margin-bottom: 6px;">Архитектурен план</span>
+            <h3>Архитектурен план и реконструкция</h3>
+            <p>Цялостна класическа скица на комплекса в мащаб, показваща разположението на откритата палестра, сводестите зали и подземната отоплителна инфраструктура.</p>
+          </div>
+        </div>
+
+        <!-- Карта 5: Руините днес -->
         <div class="gallery-card">
           <div class="gallery-card-img">
             <svg viewBox="0 0 300 180" style="width:100%; height:100%;">
@@ -221,13 +269,58 @@
     <!-- Футър съгласно схемата -->
     <footer class="site-footer">
       <div class="footer-team">
-        Отбор „Одесос“
+        Отбор "Екип 404"
         <span>Ученически проект · Римските терми във Варна</span>
       </div>
       <div class="footer-contacts">
-        <strong>Контакти:</strong> гр. Варна, ул. „Сан Стефано“ / ул. „Хан Крум“ ·
-        <a href="https://maps.google.com/?q=Roman+Thermae+Varna" target="_blank" rel="noopener">Google Maps</a>
+        <strong>Контакти:</strong> гр. Варна, ул. "Царевец" 1 ·
+        <a href="https://maps.app.goo.gl/nygDXhKZ95Vy9piG9" target="_blank" rel="noopener">Google Maps</a> ·
+        <a href="https://7suvarna.com" target="_blank" rel="noopener">Официален сайт на 7 СУ "Найден Геров"</a>
       </div>
     </footer>
+
+    <!-- Модален прозорец за детайлен преглед на снимки -->
+    <div id="gallery-lightbox" class="gallery-modal" role="dialog" aria-modal="true" aria-label="Преглед на изображение">
+      <div class="gallery-modal-content">
+        <button class="gallery-modal-close" id="lightbox-close" aria-label="Затвори">✕</button>
+        <img class="gallery-modal-img" id="lightbox-img" src="" alt="" />
+        <div class="gallery-modal-caption" id="lightbox-caption"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('gallery-lightbox');
+        const modalImg = document.getElementById('lightbox-img');
+        const modalCap = document.getElementById('lightbox-caption');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        document.querySelectorAll('.gallery-card-img img').forEach((img) => {
+          img.addEventListener('click', () => {
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            const title = img.closest('.gallery-card')?.querySelector('h3')?.textContent || img.alt;
+            modalCap.textContent = title;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        function closeModal() {
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+          });
+        }
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeModal();
+        });
+      });
+    </script>
   </body>
 </html>

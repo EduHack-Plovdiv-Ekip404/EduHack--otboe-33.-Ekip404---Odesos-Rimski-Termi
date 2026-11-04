@@ -6,7 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const brand = document.querySelector('.brand');
   if (brand && !brand.querySelector('.brand-logo')) {
     const img = document.createElement('img');
-    img.src = 'assets/aistudio/emblem_transparent_c3ec1952.png';
+    img.src = 'https://cdn.jsdelivr.net/gh/EduHack-Plovdiv-Ekip404/EduHack--otboe-33.-Ekip404---Odesos-Rimski-Termi/assets/aistudio/emblem_transparent_c3ec1952.png';
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = 'assets/aistudio/emblem_transparent_c3ec1952.png';
+    };
     img.alt = 'Екип 404 - Одесос';
     img.className = 'brand-logo';
     brand.prepend(img);
